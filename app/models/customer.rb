@@ -1,5 +1,7 @@
 class Customer < ApplicationRecord
-    belongs_to :branch, optional: true
+  include Discard::Model
+  
+    belongs_to :branch
     has_many :user_cards
   
     validates :first_name, presence: true, length: { maximum: 50 }
@@ -10,6 +12,15 @@ class Customer < ApplicationRecord
     validates :address, presence: true
     validates :profile_image, length: { maximum: 255 }, allow_nil: true
     validates :account_type, inclusion: { in: %w[saving current salary], message: "%{value} is not a valid account type" }
+
+
+    # before_discard do
+    #   account_transactions.discard_all
+    # end
+
+    # after_undiscard do
+    #   account_transactions.undiscard_all
+    # end
 
     before_create :generate_customer_id
    

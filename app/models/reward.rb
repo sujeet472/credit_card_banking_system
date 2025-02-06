@@ -1,7 +1,9 @@
 class Reward < ApplicationRecord
+  include Discard::Model
+  
     # Associations
-    belongs_to :account_transaction, primary_key: :account_transaction_id, foreign_key: :account_transaction_id
-    belongs_to :user_card, primary_key: :user_card_id, foreign_key: :user_card_id
+    belongs_to :account_transaction
+    belongs_to :user_card
   
     # Validations
     validates :account_transaction_id, presence: true

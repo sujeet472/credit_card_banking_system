@@ -1,10 +1,20 @@
 class CreditCard < ApplicationRecord
+  include Discard::Model
+  
     has_many :user_cards
   
     validates :type_of_card, presence: true
     validates :credit_limit, presence: true, numericality: { greater_than_or_equal_to: 0 }
     validates :type_of_card, inclusion: { in: %w[silver gold platinum], message: "%{value} is not a valid card type" }
   
+    before_discard do
+      user_cards.discard_all
+    end
+
+    after_undiscard do
+      user_cards.undiscard_all
+    end
+
     before_create :generate_credit_card_id
    
     private

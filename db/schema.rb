@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_06_170059) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_06_173309) do
   create_table "account_transactions", id: { type: :string, limit: 20 }, force: :cascade do |t|
     t.string "user_card_id", limit: 20, null: false
     t.datetime "transaction_date", null: false
@@ -96,6 +96,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_06_170059) do
   end
 
   add_foreign_key "account_transactions", "customers", column: "merchant_id"
+  add_foreign_key "customers", "branches"
   add_foreign_key "rewards", "account_transactions"
   add_foreign_key "rewards", "user_cards"
+  add_foreign_key "user_cards", "credit_cards"
+  add_foreign_key "user_cards", "customers"
 end

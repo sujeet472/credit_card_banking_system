@@ -1,7 +1,10 @@
 class UserCard < ApplicationRecord
+  include Discard::Model
+  
     belongs_to :credit_card
     belongs_to :customer
-  
+    has_many :rewards
+
     validates :credit_card_id, presence: true
     validates :customer_id, presence: true
     validates :issue_date, presence: true
@@ -11,17 +14,30 @@ class UserCard < ApplicationRecord
     validates :available_limit, presence: true, numericality: { greater_than_or_equal_to: 0 }
   
 
+    before_discard do
+      rewards.discard_all
+    end
+
+    after_undiscard do
+      rewards.undiscard_all
+    end
+
+
     # Virtual attribute to handle CVV input
     attr_accessor :cvv
 
     # Automatically generate user_card_id in the format UC00x
     before_create :generate_user_card_id
+    before_save :hash_cvv
   
     private
-  
     def generate_user_card_id
-      # Assuming 'UC00' + a unique number, here using ActiveRecord's `id` to generate a sequential number
-      self.user_card_id ||= "UC#{sprintf('%04d', self.class.count + 1)}"
+      # Get the next available reward number
+      last_id = UserCard.order(:id).last&.id
+      next_number = last_id ? last_id[1..-1].to_i + 1 : 1 # Start from 1 if there are no records
+  
+      # Format the reward_id as R00(x), where (x) is the next number
+      self.id = "UC#{next_number.to_s.rjust(3, '0')}"
     end
 
     def hash_cvv
