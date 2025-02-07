@@ -1,0 +1,118 @@
+<%= form_with model: branch do |form| %>
+  <!-- Display Branch ID only in edit mode -->
+  <% if branch.persisted? %>
+    <div>
+      <%= form.label :branch_id %><br>
+      <%= form.text_field :branch_id, readonly: true %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :branch_name %><br>
+    <%= form.text_area :branch_name %><br>
+    <% branch.errors.full_messages_for(:branch_name).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :branch_address %><br>
+    <%= form.text_area :branch_address %><br>
+    <% branch.errors.full_messages_for(:branch_address).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :branch_manager %><br>
+    <%= form.text_area :branch_manager %><br>
+    <% branch.errors.full_messages_for(:branch_manager).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :branch_phone %><br>
+    <%= form.text_area :branch_phone %><br>
+    <% branch.errors.full_messages_for(:branch_phone).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :branch_email %><br>
+    <%= form.text_area :branch_email %><br>
+    <% branch.errors.full_messages_for(:branch_email).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+<%= form_with model: branch do |form| %>
+    <div>
+      <%= form.label :branch_id %><br>
+      <%= form.text_field :branch_id %>
+      <% branch.errors.full_messages_for(:name).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+  
+    <div>
+      <%= form.label :branch_name%><br>
+      <%= form.text_area :branch_name %><br>
+      <% branch.errors.full_messages_for(:quantity).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.label :branch_address%><br>
+      <%= form.text_area :branch_address %><br>
+      <% branch.errors.full_messages_for(:quantity).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.label :branch_manager%><br>
+      <%= form.text_area :branch_manager %><br>
+      <% branch.errors.full_messages_for(:quantity).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.label :branch_phone%><br>
+      <%= form.text_area :branch_phone %><br>
+      <% branch.errors.full_messages_for(:quantity).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.label :branch_email%><br>
+      <%= form.text_area :branch_email %><br>
+      <% branch.errors.full_messages_for(:quantity).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+  
+    <div>
+      <%= form.submit %>
+    </div>
+  <% end %>
+  
