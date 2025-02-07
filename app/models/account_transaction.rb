@@ -3,6 +3,8 @@ class AccountTransaction < ApplicationRecord
   
     belongs_to :user_card
     belongs_to :merchant, class_name: "Customer", foreign_key: "merchant_id"
+    # belongs_to :reward, optional: true
+    has_one :reward
   
     validates :user_card_id, presence: true
     validates :transaction_date, presence: true
@@ -11,13 +13,14 @@ class AccountTransaction < ApplicationRecord
     validates :transaction_type, presence: true, inclusion: { in: ['purchase', 'refund', 'adjustment'] }
   
 
-    # before_discard do
-    #   rewards.discard_all
-    # end
+    before_discard do
+      # rewards.discard_all
+      reward.discard if reward.present?
+    end
 
-    # after_undiscard do
-    #   rewards.undiscard_all
-    # end
+    after_undiscard do
+      reward.undiscard
+    end
 
     # Automatically generate account_transaction_id in the format T00(x)
     before_create :generate_account_transaction_id

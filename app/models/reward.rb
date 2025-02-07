@@ -19,11 +19,11 @@ class Reward < ApplicationRecord
   
     def generate_reward_id
       # Get the next available reward number
-      last_id = Reward.order(:reward_id).last&.reward_id
+      last_id = Reward.order(:id).last&.id
       next_number = last_id ? last_id[1..-1].to_i + 1 : 1 # Start from 1 if there are no records
   
       # Format the reward_id as R00(x), where (x) is the next number
-      self.reward_id = "R#{next_number.to_s.rjust(3, '0')}"
+      self.id = "R#{next_number.to_s.rjust(3, '0')}"
     end
   
     def update_last_updated

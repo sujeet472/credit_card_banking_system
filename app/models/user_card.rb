@@ -4,6 +4,7 @@ class UserCard < ApplicationRecord
     belongs_to :credit_card
     belongs_to :customer
     has_many :rewards
+    has_many :account_transactions
 
     validates :credit_card_id, presence: true
     validates :customer_id, presence: true
@@ -16,10 +17,12 @@ class UserCard < ApplicationRecord
 
     before_discard do
       rewards.discard_all
+      account_transactions.discard_all
     end
 
     after_undiscard do
       rewards.undiscard_all
+      account_transactions.undiscard_all
     end
 
 

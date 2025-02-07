@@ -3,6 +3,8 @@ class Customer < ApplicationRecord
   
     belongs_to :branch
     has_many :user_cards
+    has_many :merchant_transactions, class_name: "AccountTransaction", foreign_key: "merchant_id"
+
   
     validates :first_name, presence: true, length: { maximum: 50 }
     validates :last_name, presence: true, length: { maximum: 50 }
@@ -14,13 +16,15 @@ class Customer < ApplicationRecord
     validates :account_type, inclusion: { in: %w[saving current salary], message: "%{value} is not a valid account type" }
 
 
-    # before_discard do
-    #   account_transactions.discard_all
-    # end
+    before_discard do
+      merchant_transactions.discard_all
+      user_cards.discard_all
+    end
 
-    # after_undiscard do
-    #   account_transactions.undiscard_all
-    # end
+    after_undiscard do
+      merchant_transactions.undiscard_all
+      user_cards.undiscard_all
+    end
 
     before_create :generate_customer_id
    
