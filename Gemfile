@@ -63,3 +63,5 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'discard'
 
 gem "devise", "~> 4.9"
+
+gem "jsbundling-rails", "~> 1.3"
