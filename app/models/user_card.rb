@@ -10,7 +10,7 @@ class UserCard < ApplicationRecord
     validates :customer_id, presence: true
     validates :issue_date, presence: true
     validates :expiry_date, presence: true
-    validates :cvv, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 100, less_than_or_equal_to: 999 }
+    validates :cvv, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 100, less_than_or_equal_to: 999 }, on: :create
     validates :is_active, inclusion: { in: [true, false] }
     validates :available_limit, presence: true, numericality: { greater_than_or_equal_to: 0 }
   

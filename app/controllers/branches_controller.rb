@@ -1,8 +1,8 @@
 class BranchesController < ApplicationController
     before_action :set_branch, only: %i[show update destroy restore]
     
-    before_action :authenticate_user!  # Ensure user is logged in
-    before_action :check_email_confirmed # Restrict unconfirmed users
+    # before_action :authenticate_user!  # Ensure user is logged in
+    # before_action :check_email_confirmed # Restrict unconfirmed users
 
 
     def index

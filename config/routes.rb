@@ -23,5 +23,14 @@ Rails.application.routes.draw do
       patch :restore
     end
   end
+
+  
+  resources :account_transactions do
+    member do
+      patch :undiscard
+    end
+  end
+  
+  
   
 end
