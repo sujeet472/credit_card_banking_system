@@ -1,6 +1,6 @@
 class AccountTransactionsController < ApplicationController
 
-    before_action :set_account_transaction, only: [:show, :destroy, :undiscard]
+    before_action :set_account_transaction, only: [:show, :destroy,:update, :undiscard]
   
     # GET /account_transactions
     def index
@@ -10,28 +10,42 @@ class AccountTransactionsController < ApplicationController
   
     # GET /account_transactions/:id
     def show
-      render json: @account_transaction
+      # render json: @account_transaction
+      @account_transaction
     end
-  
+    
+
+    def new
+      @account_transaction = AccountTransaction.new
+    end
+
     # POST /account_transactions
     def create
       @account_transaction = AccountTransaction.new(account_transaction_params)
       
       if @account_transaction.save
-        render json: @account_transaction, status: :created
+        
+        redirect_to @account_transaction
+        # render json: @account_transaction, status: :created
+      else
+        flash.now[:alert] = @account_transaction.errors.full_messages.join(", ")
+
+        render json: @account_transaction.errors, status: :unprocessable_entity
+      end
+    end
+
+    def edit
+      @account_transaction = AccountTransaction.kept.find(params[:id]) 
+    end
+  
+    # PATCH/PUT /account_transactions/:id
+    def update
+      if @account_transaction.update(account_transaction_params)
+        render json: @account_transaction
       else
         render json: @account_transaction.errors, status: :unprocessable_entity
       end
     end
-  
-    # PATCH/PUT /account_transactions/:id
-    # def update
-    #   if @account_transaction.update(account_transaction_params)
-    #     render json: @account_transaction
-    #   else
-    #     render json: @account_transaction.errors, status: :unprocessable_entity
-    #   end
-    # end
   
     # DELETE /account_transactions/:id (Soft Delete)
     def destroy

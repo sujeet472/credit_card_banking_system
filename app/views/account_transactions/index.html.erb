@@ -12,7 +12,7 @@
     <table class="table table-striped">
       <thead class="table-dark">
         <tr>
-          <th scope="col">#</th>
+          <th scope="col">S No</th>
           <th scope="col">User Card</th>
           <th scope="col">Amount</th>
           <th scope="col">Merchant</th>
@@ -26,16 +26,18 @@
           <tr>
             <th scope="row"><%= transaction.id %></th>
             <td><%= transaction.user_card_id %></td>
-            <td>$<%= transaction.amount %></td>
+            <td>₹<%= transaction.amount %></td>
             <td><%= transaction.merchant_id %></td>
             <td><%= transaction.transaction_type %></td>
             <td><%= transaction.transaction_date %></td>
             <td>
-              <%= link_to "Show", account_transaction_path(transaction), class: "btn btn-primary btn-sm" %>
-              <%= button_to "Delete", account_transaction_path(transaction), data: { 
+              <%= link_to "Show", account_transaction_path(transaction), class: "btn btn-outline-primary em-2" %>
+              <%= link_to "Update", edit_account_transaction_path(transaction), class: "btn btn-outline-warning em-2" %>
+
+              <%= link_to "Delete", account_transaction_path(transaction), data: { 
                   turbo_method: :delete, 
                   turbo_confirm: "Are you sure?" 
-                  }, class: "btn btn-danger btn-sm" %>
+                  }, class: "btn btn-outline-danger em-2" %>
               </td>
               </tr>
               <% end %>

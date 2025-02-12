@@ -1,0 +1,53 @@
+<div class="container mt-4">
+  <div class="card shadow-lg p-4">
+    <h3 class="text-center mb-4">Transaction Details</h3>
+
+    <table class="table table-bordered">
+      <tr>
+        <th>Transaction ID</th>
+        <td><%= @account_transaction.id %></td>
+      </tr>
+      <tr>
+        <th>User Card ID</th>
+        <td><%= @account_transaction.user_card_id %></td>
+      </tr>
+      <tr>
+        <th>Transaction Date</th>
+        <td><%= @account_transaction.transaction_date.strftime("%d-%m-%Y %H:%M") %></td>
+      </tr>
+      <tr>
+        <th>Amount</th>
+        <td>$<%= number_to_currency(@account_transaction.amount, unit: "", delimiter: ",") %></td>
+      </tr>
+      <tr>
+        <th>Merchant ID</th>
+        <td><%= @account_transaction.merchant_id %></td>
+      </tr>
+      <tr>
+        <th>Location</th>
+        <td><%= @account_transaction.location.presence || "N/A" %></td>
+      </tr>
+      <tr>
+        <th>Transaction Type</th>
+        <td><%= @account_transaction.transaction_type.capitalize %></td>
+      </tr>
+      <tr>
+        <th>Created At</th>
+        <td><%= @account_transaction.created_at.strftime("%d-%m-%Y %H:%M") %></td>
+      </tr>
+      <tr>
+        <th>Updated At</th>
+        <td><%= @account_transaction.updated_at.strftime("%d-%m-%Y %H:%M") %></td>
+      </tr>
+      <tr>
+        <th>Discarded?</th>
+        <td><%= @account_transaction.discarded_at? ? "Yes (#{@account_transaction.discarded_at.strftime('%d-%m-%Y %H:%M')})" : "No" %></td>
+      </tr>
+    </table>
+
+    <div class="text-center mt-3">
+      <%= link_to "Edit Transaction", edit_account_transaction_path(@account_transaction), class: "btn btn-warning me-2 disabled"  %>
+      <%= link_to "Back to Transactions", account_transactions_path, class: "btn btn-secondary" %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<%= form_with model: account_transaction, class: "needs-validation", data: { turbo: false }, novalidate: true do |form| %>
+  <div class="container mt-4">
+    <div class="card shadow-lg p-4">
+      <h3 class="text-center mb-4">
+        <%= account_transaction&.persisted? ? "Edit Transaction" : "New Transaction" %>
+      </h3>
+
+      <% if account_transaction&.persisted? %>
+        <div class="mb-3">
+          <%= form.label :id, "Transaction ID", class: "form-label fw-bold" %>
+          <%= form.text_field :id, class: "form-control", readonly: true %>
+        </div>
+      <% end %>
+
+      <div class="mb-3">
+        <%= form.label :user_card_id, "User Card ID", class: "form-label fw-bold" %>
+        <%= form.text_field :user_card_id, class: "form-control", required: true %>
+        <div class="invalid-feedback">User Card ID is required.</div>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :transaction_date, "Transaction Date", class: "form-label fw-bold" %>
+        <%= form.datetime_local_field :transaction_date, class: "form-control", required: true %>
+        <div class="invalid-feedback">Transaction date is required.</div>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :amount, "Amount", class: "form-label fw-bold" %>
+        <%= form.number_field :amount, class: "form-control", step: "0.01", required: true %>
+        <div class="invalid-feedback">Amount is required.</div>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :merchant_id, "Merchant ID", class: "form-label fw-bold" %>
+        <%= form.text_field :merchant_id, class: "form-control", maxlength: 20, required: true %>
+        <div class="invalid-feedback">Merchant ID is required.</div>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :location, "Location", class: "form-label fw-bold" %>
+        <%= form.text_field :location, class: "form-control", maxlength: 100 %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :transaction_type, "Transaction Type", class: "form-label fw-bold" %>
+        <%= form.select :transaction_type, ["purchase", "withdrawal", "deposit", "transfer"], {}, class: "form-select", required: true %>
+        <div class="invalid-feedback">Transaction type is required.</div>
+      </div>
+
+      <div class="text-center">
+        <%= form.submit account_transaction&.persisted? ? "Update Transaction" : "Create Transaction", class: "btn btn-primary w-50" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
