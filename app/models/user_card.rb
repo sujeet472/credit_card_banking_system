@@ -5,6 +5,7 @@ class UserCard < ApplicationRecord
     belongs_to :customer
     has_many :rewards
     has_many :account_transactions
+    has_many :merchant_transactions, class_name: "AccountTransaction", foreign_key: "merchant_id"
 
     validates :credit_card_id, presence: true
     validates :customer_id, presence: true
@@ -34,14 +35,26 @@ class UserCard < ApplicationRecord
     before_save :hash_cvv
   
     private
+
     def generate_user_card_id
-      # Get the next available reward number
-      last_id = UserCard.order(:id).last&.id
-      next_number = last_id ? last_id[1..-1].to_i + 1 : 1 # Start from 1 if there are no records
-  
-      # Format the reward_id as R00(x), where (x) is the next number
+      last_card = UserCard.lock("FOR UPDATE").where("id LIKE 'UC%'")
+                          .order(Arel.sql("CAST(SUBSTR(id, 3) AS INTEGER) DESC"))
+                          .first
+      next_number = last_card ? last_card.id[2..].to_i + 1 : 1
       self.id = "UC#{next_number.to_s.rjust(3, '0')}"
     end
+    
+
+
+
+    # def generate_user_card_id
+    #   # Get the next available reward number
+    #   last_id = UserCard.order(:id).last&.id
+    #   next_number = last_id ? last_id[1..-1].to_i + 1 : 1 # Start from 1 if there are no records
+  
+    #   # Format the reward_id as R00(x), where (x) is the next number
+    #   self.id = "UC#{next_number.to_s.rjust(3, '0')}"
+    # end
 
     def hash_cvv
       if cvv.present?

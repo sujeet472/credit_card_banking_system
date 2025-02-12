@@ -1,0 +1,41 @@
+<div class="container mt-4">
+  <div class="card shadow-lg p-4">
+    <h3 class="text-center mb-4">User Cards</h3>
+    <div class="text-end mb-3">
+      <%= link_to "New User Card", new_user_card_path, class: "btn btn-primary" %>
+    </div>
+    
+    <table class="table table-striped table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>User Card ID</th>
+          <th>Credit Card ID</th>
+          <th>Customer ID</th>
+          <th>Issue Date</th>
+          <th>Expiry Date</th>
+          <th>Available Limit</th>
+          <th>Active</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @user_cards.each do |user_card| %>
+          <tr>
+            <td><%= user_card.id %></td>
+            <td><%= user_card.credit_card_id %></td>
+            <td><%= user_card.customer_id %></td>
+            <td><%= user_card.issue_date %></td>
+            <td><%= user_card.expiry_date %></td>
+            <td><%= number_to_currency(user_card.available_limit) %></td>
+            <td><%= user_card.is_active ? "Yes" : "No" %></td>
+            <td>
+              <%= link_to "Show", user_card_path(user_card), class: "btn btn-info btn-sm" %>
+              <%= link_to "Edit", edit_user_card_path(user_card), class: "btn btn-warning btn-sm" %>
+              <%= link_to "Discard", user_card_path(user_card), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

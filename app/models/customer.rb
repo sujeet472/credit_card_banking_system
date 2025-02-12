@@ -3,7 +3,7 @@ class Customer < ApplicationRecord
   
     belongs_to :branch
     has_many :user_cards
-    has_many :merchant_transactions, class_name: "AccountTransaction", foreign_key: "merchant_id"
+    # has_many :merchant_transactions, class_name: "AccountTransaction", foreign_key: "merchant_id"
 
   
     validates :first_name, presence: true, length: { maximum: 50 }

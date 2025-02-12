@@ -37,7 +37,10 @@ Rails.application.routes.draw do
     end
   end
 
-  
-  
+  resources :user_cards do
+    member do
+      patch :restore
+    end
+  end
   
 end

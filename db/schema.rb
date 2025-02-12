@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_07_084244) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_12_174049) do
   create_table "account_transactions", id: { type: :string, limit: 20 }, force: :cascade do |t|
     t.string "user_card_id", limit: 20, null: false
     t.datetime "transaction_date", null: false
@@ -112,8 +112,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_07_084244) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "account_transactions", "customers", column: "merchant_id"
   add_foreign_key "account_transactions", "user_cards"
+  add_foreign_key "account_transactions", "user_cards", column: "merchant_id"
   add_foreign_key "customers", "branches"
   add_foreign_key "rewards", "account_transactions"
   add_foreign_key "rewards", "user_cards"

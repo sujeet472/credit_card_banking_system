@@ -11,7 +11,7 @@ class BranchesController < ApplicationController
     end
 
     def show
-        @branch = Branch.with_discarded.find(params[:id])
+        
     end
 
     def new
@@ -23,7 +23,7 @@ class BranchesController < ApplicationController
         if @branch.save
             redirect_to @branch
         else
-            render :new, status: :unprocessable_entity
+            render :new, status: :unprocessable_entity # return 422
         end
     end
 
@@ -46,7 +46,7 @@ class BranchesController < ApplicationController
           format.html { redirect_to branches_path, notice: "Branch was successfully discarded." }
           format.json { head :no_content }
         end
-      end
+    end
     
     def restore
         @branch.undiscard
@@ -66,6 +66,6 @@ class BranchesController < ApplicationController
     end
 
     def branch_params
-        params.require(:branch).permit(:branch_id, :branch_name, :branch_address, :branch_manager, :branch_phone, :branch_email)
+        params.require(:branch).permit(:id, :branch_name, :branch_address, :branch_manager, :branch_phone, :branch_email)
     end
 end
