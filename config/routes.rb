@@ -30,6 +30,13 @@ Rails.application.routes.draw do
       patch :undiscard
     end
   end
+
+  resources :rewards do
+    member do
+      patch :undiscard
+    end
+  end
+
   
   
   

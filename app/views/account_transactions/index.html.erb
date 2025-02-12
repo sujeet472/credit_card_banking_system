@@ -32,7 +32,10 @@
             <td><%= transaction.transaction_date %></td>
             <td>
               <%= link_to "Show", account_transaction_path(transaction), class: "btn btn-primary btn-sm" %>
-              <%= link_to "Delete", account_transaction_path(transaction), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+              <%= button_to "Delete", account_transaction_path(transaction), data: { 
+                  turbo_method: :delete, 
+                  turbo_confirm: "Are you sure?" 
+                  }, class: "btn btn-danger btn-sm" %>
               </td>
               </tr>
               <% end %>

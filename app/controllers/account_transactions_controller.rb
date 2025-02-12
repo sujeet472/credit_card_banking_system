@@ -35,6 +35,7 @@ class AccountTransactionsController < ApplicationController
   
     # DELETE /account_transactions/:id (Soft Delete)
     def destroy
+      @account_transaction.discard
       if @account_transaction.discard
         # @account_transaction.restore_available_limit
         render json: { message: "Transaction discarded successfully." }
