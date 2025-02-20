@@ -1,4 +1,4 @@
-class Customer < ApplicationRecord
+class Profile < ApplicationRecord
   include Discard::Model
   
     belongs_to :branch
@@ -26,17 +26,17 @@ class Customer < ApplicationRecord
       user_cards.undiscard_all
     end
 
-    before_create :generate_customer_id
+    before_create :generate_profile_id
    
     private
   
-    def generate_customer_id
+    def generate_profile_id
       # Get the next available reward number
-      last_id = Customer.order(:id).last&.id
+      last_id = Profile.order(:id).last&.id
       next_number = last_id ? last_id[1..-1].to_i + 1 : 1 # Start from 1 if there are no records
   
       # Format the reward_id as R00(x), where (x) is the next number
-      self.id = "C#{next_number.to_s.rjust(3, '0')}"
+      self.id = "P#{next_number.to_s.rjust(3, '0')}"
     end
   end
   

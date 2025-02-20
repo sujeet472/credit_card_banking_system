@@ -10,7 +10,7 @@
         <tr>
           <th>User Card ID</th>
           <th>Credit Card ID</th>
-          <th>Customer ID</th>
+          <th>Profile ID</th>
           <th>Issue Date</th>
           <th>Expiry Date</th>
           <th>Available Limit</th>
@@ -23,7 +23,7 @@
           <tr>
             <td><%= user_card.id %></td>
             <td><%= user_card.credit_card_id %></td>
-            <td><%= user_card.customer_id %></td>
+            <td><%= user_card.profile_id %></td>
             <td><%= user_card.issue_date %></td>
             <td><%= user_card.expiry_date %></td>
             <td><%= number_to_currency(user_card.available_limit) %></td>
@@ -31,7 +31,7 @@
             <td>
               <%= link_to "Show", user_card_path(user_card), class: "btn btn-info btn-sm" %>
               <%= link_to "Edit", edit_user_card_path(user_card), class: "btn btn-warning btn-sm" %>
-              <%= link_to "Discard", user_card_path(user_card), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+              <%= link_to "Discard", user_card_path(user_card), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
             </td>
           </tr>
         <% end %>

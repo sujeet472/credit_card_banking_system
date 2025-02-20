@@ -63,7 +63,7 @@ class UserCardsController < ApplicationController
     end
 
     def user_card_params
-        params.require(:user_card).permit(:id, :credit_card_id, :customer_id, :issue_date, :expiry_date, :is_active, :available_limit, :created_at, :updated_at, hashed_cvv)
+        params.require(:user_card).permit(:id, :credit_card_id, :profile_id, :issue_date, :expiry_date, :is_active, :available_limit, :created_at, :updated_at, hashed_cvv)
     end
 
 end

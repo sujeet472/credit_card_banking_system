@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_12_174049) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_20_052350) do
   create_table "account_transactions", id: { type: :string, limit: 20 }, force: :cascade do |t|
     t.string "user_card_id", limit: 20, null: false
     t.datetime "transaction_date", null: false
@@ -47,7 +47,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_12_174049) do
     t.index ["discarded_at"], name: "index_credit_cards_on_discarded_at"
   end
 
-  create_table "customers", id: { type: :string, limit: 20 }, force: :cascade do |t|
+  create_table "profiles", id: { type: :string, limit: 20 }, force: :cascade do |t|
     t.string "first_name", limit: 50, null: false
     t.string "last_name", limit: 50, null: false
     t.date "date_of_birth", null: false
@@ -60,9 +60,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_12_174049) do
     t.datetime "updated_at", null: false
     t.string "account_type", default: "saving", null: false
     t.datetime "discarded_at"
-    t.index ["discarded_at"], name: "index_customers_on_discarded_at"
-    t.index ["email"], name: "index_customers_on_email", unique: true
-    t.index ["phone_number"], name: "index_customers_on_phone_number", unique: true
+    t.index ["discarded_at"], name: "index_profiles_on_discarded_at"
+    t.index ["email"], name: "index_profiles_on_email", unique: true
+    t.index ["phone_number"], name: "index_profiles_on_phone_number", unique: true
   end
 
   create_table "rewards", id: { type: :string, limit: 20 }, force: :cascade do |t|
@@ -81,7 +81,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_12_174049) do
 
   create_table "user_cards", id: { type: :string, limit: 20 }, force: :cascade do |t|
     t.string "credit_card_id", limit: 20, null: false
-    t.string "customer_id", limit: 20, null: false
+    t.string "profile_id", limit: 20, null: false
     t.date "issue_date", null: false
     t.date "expiry_date", null: false
     t.boolean "is_active", default: true
@@ -91,8 +91,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_12_174049) do
     t.string "hashed_cvv"
     t.datetime "discarded_at"
     t.index ["credit_card_id"], name: "index_user_cards_on_credit_card_id"
-    t.index ["customer_id"], name: "index_user_cards_on_customer_id"
     t.index ["discarded_at"], name: "index_user_cards_on_discarded_at"
+    t.index ["profile_id"], name: "index_user_cards_on_profile_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -114,9 +114,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_12_174049) do
 
   add_foreign_key "account_transactions", "user_cards"
   add_foreign_key "account_transactions", "user_cards", column: "merchant_id"
-  add_foreign_key "customers", "branches"
+  add_foreign_key "profiles", "branches"
   add_foreign_key "rewards", "account_transactions"
   add_foreign_key "rewards", "user_cards"
   add_foreign_key "user_cards", "credit_cards"
-  add_foreign_key "user_cards", "customers"
+  add_foreign_key "user_cards", "profiles"
+  add_foreign_key "user_cards", "profiles"
 end

@@ -2,7 +2,7 @@
 
 one:
   credit_card_id: MyString
-  customer_id: MyString
+  profile_id: MyString
   issue_date: 2025-02-06
   expiry_date: 2025-02-06
   cvv: 1
@@ -10,7 +10,7 @@ one:
 
 two:
   credit_card_id: MyString
-  customer_id: MyString
+  profile_id: MyString
   issue_date: 2025-02-06
   expiry_date: 2025-02-06
   cvv: 1

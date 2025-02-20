@@ -2,13 +2,13 @@ class UserCard < ApplicationRecord
   include Discard::Model
   
     belongs_to :credit_card
-    belongs_to :customer
+    belongs_to :profile
     has_many :rewards
     has_many :account_transactions
     has_many :merchant_transactions, class_name: "AccountTransaction", foreign_key: "merchant_id"
 
     validates :credit_card_id, presence: true
-    validates :customer_id, presence: true
+    validates :profile_id, presence: true
     validates :issue_date, presence: true
     validates :expiry_date, presence: true
     validates :cvv, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 100, less_than_or_equal_to: 999 }, on: :create

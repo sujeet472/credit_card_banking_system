@@ -20,14 +20,8 @@ class CreditCard < ApplicationRecord
     private
   
     def generate_credit_card_id
-      # Get the next available reward number
       last_id = CreditCard.order(:id).last&.id
-      next_number = last_id ? last_id[1..-1].to_i + 1 : 1 # Start from 1 if there are no records
-  
-      # Format the reward_id as R00(x), where (x) is the next number
+      next_number = last_id.present? ? last_id[2..-1].to_i + 1 : 1 
       self.id = "CC#{next_number.to_s.rjust(3, '0')}"
     end
-  
-  
   end
-  

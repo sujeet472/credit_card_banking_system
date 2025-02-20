@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "credit_cards/index"
   get "home/index"
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -42,5 +43,7 @@ Rails.application.routes.draw do
       patch :restore
     end
   end
+
+  resources :credit_cards 
   
 end
