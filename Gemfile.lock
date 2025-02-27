@@ -133,6 +133,8 @@ GEM
     jsbundling-rails (1.3.1)
       railties (>= 6.0.0)
     json (2.9.1)
+    jwt (2.10.1)
+      base64
     language_server-protocol (3.17.0.4)
     launchy (3.1.0)
       addressable (~> 2.8)
@@ -331,6 +333,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   jsbundling-rails (~> 1.3)
+  jwt
   letter_opener
   puma (>= 5.0)
   rails (~> 7.2.2, >= 7.2.2.1)
